@@ -1,4 +1,4 @@
-package io.github.carloshkayser.twitterwordcount;
+package io.github.carloshkayser.twitterwordcount.spouts;
 
 import org.apache.storm.spout.SpoutOutputCollector;
 import org.apache.storm.task.TopologyContext;

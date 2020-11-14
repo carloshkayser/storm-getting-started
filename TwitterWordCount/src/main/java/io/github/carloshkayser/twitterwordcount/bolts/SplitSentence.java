@@ -1,4 +1,4 @@
-package io.github.carloshkayser.twitterwordcount;
+package io.github.carloshkayser.twitterwordcount.bolts;
 
 import java.text.BreakIterator;
 

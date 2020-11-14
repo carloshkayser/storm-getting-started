@@ -1,4 +1,4 @@
-package io.github.carloshkayser.twitterwordcount;
+package io.github.carloshkayser.twitterwordcount.topologies;
 
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
@@ -6,7 +6,9 @@ import org.apache.storm.StormSubmitter;
 import org.apache.storm.topology.TopologyBuilder;
 import org.apache.storm.tuple.Fields;
 
-import io.github.carloshkayser.twitterwordcount.RandomSentenceSpout;
+import io.github.carloshkayser.twitterwordcount.spouts.RandomSentenceSpout;
+import io.github.carloshkayser.twitterwordcount.bolts.SplitSentence;
+import io.github.carloshkayser.twitterwordcount.bolts.WordCount;
 
 public class WordCountTopology {
 
