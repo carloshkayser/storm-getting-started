@@ -63,6 +63,7 @@ public class TwitterStreamSpout extends BaseRichSpout {
             this.twitterStream.sample();
         }else {
            FilterQuery query = new FilterQuery().track(keyWords);
+           // query.language("pt");
            // filterQuery.track("trump");
            this.twitterStream.filter(query);
         }

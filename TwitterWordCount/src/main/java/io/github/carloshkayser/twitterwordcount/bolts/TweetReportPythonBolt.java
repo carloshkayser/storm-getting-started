@@ -20,6 +20,7 @@ public class TweetReportPythonBolt extends ShellBolt implements IRichBolt {
         // there is no output
     }
 
+    // The getComponentConfiguration method allows you to configure various aspects of how this component runs
     @Override
     public Map<String, Object> getComponentConfiguration() { return null; }
 }

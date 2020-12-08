@@ -1,6 +1,0 @@
-/mnt/c/Users/carlo/Developer/apache-storm-hello-world/TwitterWordCount/src/main/java/io/github/carloshkayser/twitterwordcount/bolts/TweetWordCountBolt.java
-/mnt/c/Users/carlo/Developer/apache-storm-hello-world/TwitterWordCount/src/main/java/io/github/carloshkayser/twitterwordcount/spouts/TwitterStreamSpout.java
-/mnt/c/Users/carlo/Developer/apache-storm-hello-world/TwitterWordCount/src/main/java/io/github/carloshkayser/twitterwordcount/bolts/TweetReportBolt.java
-/mnt/c/Users/carlo/Developer/apache-storm-hello-world/TwitterWordCount/src/main/java/io/github/carloshkayser/twitterwordcount/utils/HashMapToFile.java
-/mnt/c/Users/carlo/Developer/apache-storm-hello-world/TwitterWordCount/src/main/java/io/github/carloshkayser/twitterwordcount/bolts/TweetSplitBolt.java
-/mnt/c/Users/carlo/Developer/apache-storm-hello-world/TwitterWordCount/src/main/java/io/github/carloshkayser/twitterwordcount/topologies/TwitterTopology.java

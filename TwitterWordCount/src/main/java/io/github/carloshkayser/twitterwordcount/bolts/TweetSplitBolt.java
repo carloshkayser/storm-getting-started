@@ -24,22 +24,33 @@ public class TweetSplitBolt extends BaseRichBolt {
 
 	@Override
 	public void execute(Tuple tuple) {
+		try {
 		
-		Status tweet = (Status) tuple.getValueByField("tweet");
+			Status tweet = (Status) tuple.getValueByField("tweet");
 
-		// Get HashTag only
-		 for(HashtagEntity hashtag : tweet.getHashtagEntities()) {
-		   // System.out.println("Hashtag: " + hashtag.getText());
-		   this.collector.emit(new Values(hashtag.getText()));
+			// Get HashTag only
+			for(HashtagEntity hashtag : tweet.getHashtagEntities()) {
+				this.collector.emit(new Values(hashtag.getText()));
+			}
+
+			// Split
+			// String[] words = tweet.getText().split(" ");
+			// for(String word : words){
+			// 	this.collector.emit(new Values(word));
+			// }
+			
+			// Mecanismo utilizado para rastrear tuplas que falharam
+			// Reprocessando-a novamente caso for o caso
+			this.collector.ack(tuple);
+
+		} catch (Exception e) {
+			this.collector.reportError(e);
+			this.collector.fail(tuple);
 		}
-
-		// Split
-		// String[] words = tweet.getText().split(" ");
-		// for(String word : words){
-		// 	this.collector.emit(new Values(word));
-		// }
+		
 	}
 
+	// The declareOutputFields method declares that the bolt emits 1-tuples with one field called "hashtag".
 	@Override
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
 		declarer.declare(new Fields("hashtag"));

@@ -63,6 +63,13 @@
       <scope>provided</scope>
     </dependency>
 
+    <!-- Add a dependency on the Flux framework -->
+    <dependency>
+        <groupId>org.apache.storm</groupId>
+        <artifactId>flux-core</artifactId>
+        <version>${storm.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>org.apache.storm</groupId>
       <artifactId>multilang-python</artifactId>
@@ -119,6 +126,20 @@
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptorRefs>  
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <archive>
+            <manifest>
+              <mainClass>io.github.carloshkayser.twitterwordcount.topologies.TwitterTopology</mainClass>
+            </manifest>
+          </archive>
         </configuration>
       </plugin>
     </plugins>

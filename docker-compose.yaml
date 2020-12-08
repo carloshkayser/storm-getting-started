@@ -1,0 +1,48 @@
+# https://hub.docker.com/_/storm
+version: '3.1'
+
+services:
+  zookeeper:
+    image: zookeeper
+    container_name: zookeeper
+    restart: always
+
+  nimbus:
+    image: storm:2.2.0
+    container_name: nimbus
+    command: storm nimbus
+    volumes:
+      - ./:/demo
+    depends_on:
+      - zookeeper
+    links:
+      - zookeeper
+    restart: always
+    ports:
+      - 6627:6627
+
+  ui:
+    image: storm:2.2.0
+    container_name: ui
+    command: storm ui
+    depends_on:
+      - zookeeper
+      - nimbus
+    links:
+      - zookeeper
+      - nimbus
+    restart: always
+    ports:
+      - 8000:8080
+
+  supervisor:
+    image: storm:2.2.0
+    container_name: supervisor
+    command: storm supervisor
+    depends_on:
+      - nimbus
+      - zookeeper
+    links:
+      - nimbus
+      - zookeeper
+    restart: always

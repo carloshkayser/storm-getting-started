@@ -1,9 +1,6 @@
 package io.github.carloshkayser.twitterwordcount.utils;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
  
@@ -46,6 +43,16 @@ public class HashMapToFile {
             } catch(Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void clearOutput() {
+        try {
+            PrintWriter writer = new PrintWriter(this.file);
+            writer.print("");
+            writer.close();
+        } catch(Exception e) {
+            e.printStackTrace();
         }
     }
 }

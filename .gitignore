@@ -1,0 +1,6 @@
+.env
+twitter4j.properties
+results.txt
+*.jar
+target
+*.class
