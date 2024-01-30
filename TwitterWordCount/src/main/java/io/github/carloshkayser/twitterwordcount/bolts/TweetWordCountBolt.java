@@ -17,18 +17,18 @@ public class TweetWordCountBolt extends BaseRichBolt {
 	private HashMapToFile toFile = null;
 
 	@Override
-    public void prepare(Map config, TopologyContext context, OutputCollector collector) {
+	public void prepare(Map config, TopologyContext context, OutputCollector collector) {
 		this.collector = collector;
 		this.counts = new HashMap<String, Long>();
 		this.toFile = new HashMapToFile();
 	}
 
-    @Override
-    public void execute(Tuple tuple) {
+	@Override
+	public void execute(Tuple tuple) {
 		try {
 			String word = tuple.getStringByField("hashtag");
 			Long count = this.counts.get(word);
-			if(count == null){
+			if (count == null) {
 				count = 0L;
 			}
 			count++;
@@ -51,7 +51,7 @@ public class TweetWordCountBolt extends BaseRichBolt {
 		}
 	}
 
-    @Override
+	@Override
 	public void cleanup() {
 		System.out.println("--- FINAL COUNTS ---");
 		List<String> keys = new ArrayList<String>();
@@ -63,10 +63,10 @@ public class TweetWordCountBolt extends BaseRichBolt {
 		System.out.println("--------------------");
 	}
 
-    @Override
-    public void declareOutputFields(OutputFieldsDeclarer declarer) {
+	@Override
+	public void declareOutputFields(OutputFieldsDeclarer declarer) {
 		// declarer.declare(new Fields("hashtag", "count"));
 		// there is nothing to output
-    }
+	}
 
 }

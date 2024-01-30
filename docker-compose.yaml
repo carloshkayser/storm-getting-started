@@ -6,13 +6,13 @@ services:
     image: zookeeper
     container_name: zookeeper
     restart: always
+    ports:
+      - 2181:2181
 
   nimbus:
-    image: storm:2.2.0
+    image: storm:2.6.0
     container_name: nimbus
     command: storm nimbus
-    volumes:
-      - ./:/demo
     depends_on:
       - zookeeper
     links:
@@ -22,7 +22,7 @@ services:
       - 6627:6627
 
   ui:
-    image: storm:2.2.0
+    image: storm:2.6.0
     container_name: ui
     command: storm ui
     depends_on:
@@ -36,9 +36,12 @@ services:
       - 8000:8080
 
   supervisor:
-    image: storm:2.2.0
+    image: storm:2.6.0
     container_name: supervisor
     command: storm supervisor
+    volumes:
+      - ./:/demo
+      - ./conf:/apache-storm-2.6.0/conf
     depends_on:
       - nimbus
       - zookeeper

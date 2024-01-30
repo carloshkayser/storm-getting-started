@@ -42,36 +42,31 @@ storm version
 docker compose up -d
 ```
 
-### Twitter HashTag Count
+### Apache Storm Examples
 
-This topology written in Java using **Apache Maven**, consists of **one [spout](http://storm.apache.org/releases/current/Concepts.html#spouts)** and **two [bolts](http://storm.apache.org/releases/current/Concepts.html#bolts)**. Basically, the spout tracks the Tweets and sent it to **Tweet split bolt** which gets the hashtags from Tweets and sent it to the **hashtag count bolt**. Finally, the results are placed in to a text file.
-
-To **build and test** the topology locally, run the command below (you need to install Apache Storm Binaries to use this) :
+Apache Storm comes with a few examples that can be used to test the installation. The examples are located in the `examples` directory.
 
 ```bash
-cd TwitterWordCount
+# access the examples directory
+cd /c/opt/apache-storm-2.6.0/examples/storm-starter
 
-mvn compile exec:java -Dstorm.topology=io.github.carloshkayser.twitterwordcount.topologies.TwitterTopology -Dexec.args="keyWord1 keyWord2"
+# compile the project
+mvn package
+
+# copy the jar file to the project directory
+cp /c/opt/apache-storm-2.6.0/examples/storm-starter/target/storm-starter-2.6.0.jar \
+  "/<dir>/storm-getting-started"
+
+# open the supervisor container
+docker exec -it supervisor bash
+
+# access the project directory
+cd /demo
+
+# execute the topology
+storm jar storm-starter-2.6.0.jar org.apache.storm.starter.WordCountTopology WordCountTopology
+storm jar storm-starter-2.6.0.jar org.apache.storm.starter.WordCountTopologyNode WordCountTopologyNode
+storm jar storm-starter-2.6.0.jar org.apache.storm.starter.SlidingWindowTopology SlidingWindowTopology
+storm jar storm-starter-2.6.0.jar org.apache.storm.starter.FastWordCountTopology FastWordCountTopology
+storm jar storm-starter-2.6.0.jar org.apache.storm.starter.AnchoredWordCount AnchoredWordCount
 ```
-
-To **build** the topology and generate a **jar** file with our topology, consider the command below:
-
-```bash
-mvn clean compile assembly:single
-```
-
-To run the topology in a **local Apache Storm cluster** use the command below:
-
-```bash
-storm local target/TwitterWordCount-1.0-SNAPSHOT-jar-with-dependencies.jar io.github.carloshkayser.twitterwordcount.topologies.TwitterTopology local keyWord1 keyWord2
-```
-
-To run the topology in an **Apache Storm cluster** use the command below:
-
-```bash
-storm jar target/TwitterWordCount-1.0-SNAPSHOT-jar-with-dependencies.jar io.github.carloshkayser.twitterwordcount.topologies.TwitterTopology remote keyWord1 keyWord2
-```
-
-**Resources**
-
-- https://docs.microsoft.com/pt-br/azure/hdinsight/storm/apache-storm-develop-java-topology
