@@ -1,9 +1,8 @@
 # https://hub.docker.com/_/storm
-version: '3.1'
 
 services:
   zookeeper:
-    image: zookeeper
+    image: zookeeper:3.9.3
     container_name: zookeeper
     restart: always
     ports:
@@ -39,9 +38,6 @@ services:
     image: storm:2.6.0
     container_name: supervisor
     command: storm supervisor
-    volumes:
-      - ./:/demo
-      - ./conf:/apache-storm-2.6.0/conf
     depends_on:
       - nimbus
       - zookeeper
@@ -49,3 +45,18 @@ services:
       - nimbus
       - zookeeper
     restart: always
+
+  dev:
+    # build: .
+    image: ghcr.io/carloshkayser/storm-devcontainer:latest
+    container_name: storm-devcontainer
+    working_dir: /demo
+    volumes:
+      - ./:/demo
+      - ./conf:/usr/local/storm/conf
+    depends_on:
+      - nimbus
+      - zookeeper
+    links:
+      - nimbus
+      - zookeeper
