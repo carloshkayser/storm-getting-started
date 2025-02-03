@@ -1,0 +1,27 @@
+{
+  "name": "Storm Development Container",
+  "dockerComposeFile": "../docker-compose.yaml",
+  "service": "dev",
+  "workspaceFolder": "/demo",
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "redhat.java",
+        "vscjava.vscode-maven",
+        "vscjava.vscode-java-debug",
+        "vscjava.vscode-java-dependency",
+        "vscjava.vscode-java-test"
+      ],
+      "settings": {
+        "java.configuration.updateBuildConfiguration": "automatic",
+        "java.compile.nullAnalysis.mode": "automatic",
+        "java.format.enabled": true
+      }
+    }
+  },
+
+  "remoteUser": "root",
+  "shutdownAction": "stopCompose"
+}
